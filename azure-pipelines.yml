@@ -54,15 +54,15 @@ steps:
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-   displayName: 'Install ReportGenerator'
-   inputs:
-    command: custom
-    custom: tool
-    arguments: 'install --global dotnet-reportgenerator-globaltool'
+  displayName: 'Install ReportGenerator'
+  inputs:
+   command: custom
+   custom: tool
+   arguments: 'install --global dotnet-reportgenerator-globaltool'
 
 - task: DotNetCoreCLI@2
-   displayName: 'Run unit tests - $(buildConfiguration)'
-   inputs:
+  displayName: 'Run unit tests - $(buildConfiguration)'
+  inputs:
     command: 'test'
     arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
     publishTestResults: true
@@ -73,8 +73,8 @@ steps:
    displayName: 'Create code coverage report'
 
 - task: PublishCodeCoverageResults@1
-   displayName: 'Publish code coverage report'
-   inputs:
+  displayName: 'Publish code coverage report'
+  inputs:
     codeCoverageTool: 'cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 
